@@ -40,8 +40,6 @@ def QuickSort(array, start, end):
         # Do a recursive call to QuickSort for the right sublist
         QuickSort(array, pivot_index + 1, end)
 
-    return array
-
 # [5, 4, 3, 2, 1, 29]
 # [5, 4, 3, 2, 1, 2]
 def Partition(array, start, end):
@@ -61,4 +59,5 @@ def Partition(array, start, end):
 
 
 input_array = [5, 4, 4, 3, 2, 1, 29, 87, 66]
-print(QuickSort(input_array, 0, len(input_array) - 1))
+QuickSort(input_array, 0, len(input_array) - 1)
+print(input_array)
