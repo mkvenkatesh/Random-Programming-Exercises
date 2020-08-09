@@ -28,45 +28,58 @@ Output 2: 1
 
 
 # Algorithm
-Efficient Approach [ O(A) solution ] :
-1. If sum of all the elements of the array is not divisible by 3, return 0.
-2. It is obvious that the sum of each part of each contiguous part will be equal
-   to the sum of all elements divided by 3.
-3. Let’s create an array cnt[ ], where cnt[ i ] equals 1, if the sum of elements
-   from ith to Ath equals Array_Sum/3 else 0. Now, calculate the cumulative sum
-   of the cnt array from the last index.
-4. Thus, we receive very simple solution: for each prefix of initial array 1…i
-   with the sum that equals Array_Sum/3 we need to add to the answer sums[i+2]
+The key is to understand that for any solutions to exist the sum of the input
+array should be divisible by 3. 
+
+1. If the sum is not divisible by 3, return 0 
+2. If not Loop through the first part of the array (which could by 0 to
+   len(array)-2 i.e 1st part can take the whole array except the last two
+   elements) 2.1 As you loop, add the indexes of the array into a new array
+   (`first`) if the running sum equals to sum(array)/3. What this means is that
+   the `first` array will hold all the possible indexes that could be part of
+   the first 1/3rd of the subarray.
+
+3. Loop through `first` array and for each index i in the `first array`, get the
+   2nd 1/3rd of the array by going from array[i+1:]
+
+3.1 for each item in array[i+1:], do a running sum and if running sum equals
+sum(array)/3 then we increment our total count. What this means is that for a
+given i value from `first` array, we are able to find the next part of the
+array. 
+
+Note: The last 1/3rd of the array can be completely ignored at this point.
+Figuring out the combinations between part 1 and part2 of the array will get you
+the answer you need.
+
 
 """
 
 class Solution:
+    # @param A : integer
+    # @param B : list of integers
+    # @return an integer
     def solve(self, A, B):
-        total = sum(B)
-
-        # The array sum has to be divisible of 3, otherwise no solution is
-        # possible
-        if total % 3 == 0:
-            target = total // 3 # 0, 1, 2, 3...
-        else:
+        sums = sum(B)
+        if sums % 3 != 0:
             return 0
+        req_sum = sums//3
+        var = 0
+        first = set()
+        total = 0
+        ##indexes possible for first_sum end index 
+        for i in range(A):
+            var += B[i]
+            if var == req_sum and i < A-2:
+                first.add(i)
 
-        answer = 0
-        first_part = 0
-        running_sum = 0
-        
-        for i in range(A - 1):
-            running_sum += B[i]
-
-            # 2nd 1/3rd of the array
-            if running_sum == 2 * target:
-                answer += first_part
-
-            # 1st 1/3rd of the array
-            if running_sum == target:
-                first_part += 1
-        
-        return answer
+        for i in first:
+            arr = B[i+1:]
+            x = 0
+            for j,value in enumerate(arr):
+                x += value
+                if x == req_sum and j < A-i-2:
+                    total += 1
+        return total
 
 # B = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 # B = [0, 1, -1, 0]
