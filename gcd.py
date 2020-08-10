@@ -40,7 +40,7 @@ def gcd_euclid(A, B):
     else:
         return gcd_euclid(B, A % B)
 
-print(gcd_euclid(2336,1314))
+print(gcd_euclid(8,25))
 
 def lcm(A,B):
     return (A*B)//gcd_euclid(A, B)
