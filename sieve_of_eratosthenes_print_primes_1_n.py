@@ -36,9 +36,8 @@ def sieve_get_primes(n):
 
     for num in range(2, int(math.sqrt(n)) + 1):
         if(prime_candidates[num]):        
-            for prime_idx in range(num * num, n + 1):
-                if prime_idx % num == 0:
-                    prime_candidates[prime_idx] = False
+            for prime_idx in range(num * num, n + 1, num):                
+                prime_candidates[prime_idx] = False
 
     return prime_candidates
 
