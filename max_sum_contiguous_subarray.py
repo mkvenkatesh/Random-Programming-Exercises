@@ -1,6 +1,6 @@
 """
 Find the contiguous subarray within an array, A of length N which has the
-largest sum.
+largest sum. - use Kadane's algorithm
 
 Input Format:
 
@@ -39,22 +39,16 @@ class Solution:
         if (len(A) == 1):
             return A[0]
             
-        running_sum = 0
-        max_sum = None
+        current_max = A[0]
+        total_max = A[0]
 
-        for i in range(0, len(A)):
-            running_sum += A[i]
-            # if input is all negative, make sure to get the maximum negative
-            # integer. Setting max_sum to None initially will help get that max
-            # negative value properly
-            if max_sum == None: 
-                max_sum = running_sum
-            else:
-                max_sum = max(running_sum, max_sum)
-            
-            # if running sum drops below 0, reset the running sum to 0 to reset
-            # the array boundary for calculating the next max value
-            if running_sum < 0:
-                running_sum = 0
+        for i in range(1, len(A)):
+            current_max = max(current_max, 0) + A[i]
+            total_max = max(current_max, total_max)        
                 
-        return max_sum
+        return total_max
+
+arr = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
+# arr = [-10, -1, -30]
+s = Solution()
+print(s.maxSubArray(arr))
