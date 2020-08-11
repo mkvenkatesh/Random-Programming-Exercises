@@ -15,22 +15,14 @@ while i < len(S)
 
 def pattern_match(S, P):
     matches = 0
-    s_idx = 0
-    while s_idx < len(S):
+    for s_idx in range(len(S)):
         for p_idx in range(len(P)):
-            if S[s_idx] == P[p_idx]:
-                s_idx += 1
-
-                if p_idx == len(P) - 1:
-                    matches += 1
-
-                if s_idx >= len(S):
-                    return matches                
-            else:
-                s_idx -= p_idx
-                break     
-
-        s_idx += 1
+            if s_idx + p_idx >= len(S):
+                break
+            if S[s_idx + p_idx] != P[p_idx]:
+                break
+        if p_idx == len(P) - 1:
+            matches += 1
 
     return matches
 
