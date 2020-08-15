@@ -1,6 +1,7 @@
 """
 Search for pattern in a string using Suffix Arrays - O(m^2 logm) + O(m logn),
-where m is the length of pattern and n is the length of input.
+where m is the length of pattern and n is the length of input. If we use LCP
+array from suffix array, the search can be done in O(m + logn)
 
 If we build a suffix array, we can leverage the sorted property of the suffix
 array to quickly find the pattern in the string using binary search

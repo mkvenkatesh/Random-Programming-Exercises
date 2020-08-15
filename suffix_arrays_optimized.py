@@ -168,6 +168,7 @@ def prefix_doubling_suffix_array(n):
     suffix_array = []
     for i in suffixes:
         suffix_array.append(i[0])
+        # print(i[1]["suffix"])
 
     return suffix_array
 
