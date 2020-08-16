@@ -1,5 +1,5 @@
 """
-Suffix Arrays - Optimized O(n log n)
+Suffix Arrays - Optimized O(n log n) - prefix doubling
 
 A suffix is a non-empty substring at the end of the string. A suffix array
 contains all the sorted suffixes of a string
