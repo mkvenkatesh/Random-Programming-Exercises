@@ -131,10 +131,10 @@ def driver_function():
     suffix_array = build_suffix_array(s) # o(n^2)
     print(suffix_array)
 
-    lcp_array = build_lcp_array(s, suffix_array)
+    lcp_array = build_lcp_array(s, suffix_array) # O(n)
     print(lcp_array)
 
-    root = TrieNode(None, {})
+    root = TrieNode(None, {}) # O(n)
     build_suffix_tree(s, root, suffix_array, lcp_array)
     print()
     print(repr(root))
