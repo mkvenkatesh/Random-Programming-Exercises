@@ -93,13 +93,10 @@ def build_suffix_tree(s, root, suffix_array, lcp_array):
                         $ --> create a new node and move the rest of the previous nodes letters to this new node, link this with parent
                         a$ --> create another node with lcp removed from the current suffix and link to parent
             """
-            # get the parent key that corresponds to the current node
+            # Get all the keys for splitting and creating new nodes
             key_to_split = [k for k,v in current_node.parent.children.items() if v == current_node][0]
-
-            # No need to split if the length of the parent key is the same as current_lcp
-            new_child_key_suffix = s[suffix_array[i]:]
+            new_child_key_suffix = current_suffix
             previous_suffix = s[suffix_array[i-1]:]
-
             new_child_key_split = previous_suffix[current_lcp:]            
             new_parent_key_split = key_to_split[ : - len(new_child_key_split)]
             new_child_key_suffix = s[suffix_array[i]+current_lcp : ]
