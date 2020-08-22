@@ -58,22 +58,24 @@ def delete_key(root, key):
         root.right = delete_key(root.right, key)
     else: # node to be deleted
 
-        # node has one or no children
-        if root.left is None:
-            temp = root.left
+        # node has no children
+        if root.left is None and root.right is None:
             root = None
-            return temp
-        elif root.right is None:
-            temp = root.right
-            root = None
-            return temp
-
+            return None
         # Node with two children, get in-order successor, which is the min value
         # in right subtree
-        min_val_node = get_min_val(root.right)
-        root.key = min_val_node.key
-        root.right = delete_key(root.right, min_val_node.key)
-        
+        elif root.left and root.right:            
+            min_val_node = get_min_val(root.right)
+            root.key = min_val_node.key
+            root.right = delete_key(root.right, min_val_node.key)
+        # Node has one children
+        else:
+            if root.left:
+                return root.left
+            else:
+                return root.right
+
+
     return root
 
 def get_min_val(node):
@@ -126,9 +128,20 @@ print("\nPostorder traversal of BST")
 traversal(root, "postorder")
 print()
 
-
 print("\nDelete 20")
 root = delete_key(root, 20) 
+
+print()
+print(repr(root))
+
+print("\nDelete 30")
+root = delete_key(root, 30) 
+
+print()
+print(repr(root))
+
+print("\nDelete 50")
+root = delete_key(root, 50) 
 
 print()
 print(repr(root))
