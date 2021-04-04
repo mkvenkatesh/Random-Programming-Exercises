@@ -1,4 +1,4 @@
-# Big O is O(K) where K is the height of the tre
+# Big O is O(N)
 # Fibonacci sequence - 0, 1, 1, 2, 3, 5, 8, 13, 21... 
 # Rule is Xn = Xn-1 + Xn-2 
 
