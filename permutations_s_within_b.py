@@ -97,4 +97,44 @@ for i in range(len(b)-len(s)+1):
         print(b[i:i+len(s)])
         
 
-    
+# Given a smaller string s and a bigger string b, design an algorithm to find all
+# permuta­tions of the shorter string within the longer one.Print the location
+# of each permutation.
+
+class Solution:
+    def __init__(self, s, b):
+        self.s = s
+        self.b = b          
+
+    # O(s)
+    def build_dict_for_s(self):
+        self.ht = {k:0 for k in self.s}
+        for char in self.s:
+            self.ht[char] += 1
+
+    # O(b*s)
+    def count_perm_of_s_in_b(self):
+        big_str = self.b
+        small_str = self.s
+        self.build_dict_for_s() # O(s)
+        for i in range(len(big_str) - len(small_str) + 1): # O(b)            
+            temp = self.ht.copy()
+            if big_str[i] not in temp:
+                continue
+            else:
+                for j in range(len(small_str)): # O(s)
+                    if big_str[i+j] in temp and temp[big_str[i+j]] > 0:
+                        temp[big_str[i+j]] -= 1
+                        if temp[big_str[i+j]] == 0:
+                            del temp[big_str[i+j]]
+                        continue
+                    else:
+                        break
+                if temp == {}:
+                    print(i, big_str[i:i+len(small_str)])
+
+s = "abbc"
+b = "cbabadcbbabbcbabaabccbabc"
+
+s = Solution(s, b)
+s.count_perm_of_s_in_b()    
